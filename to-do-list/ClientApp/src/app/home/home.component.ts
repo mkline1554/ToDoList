@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 //import { ListItem } from '../models/ListItem.model';
 import { Observable } from 'rxjs';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { ListItem } from '../models/listItem.model';
 //import { ListItem } from '../models/ListItem.model';
 //import { ListItem } from '../models/ListItem.model';
 
@@ -11,6 +13,35 @@ import { Observable } from 'rxjs';
   styleUrls:['./home.component.css']
 })
 export class HomeComponent {
+  form: FormGroup;
+  listItems: Array<ListItem> = [];
+
+  constructor(
+    private http: HttpClient,
+    private fb: FormBuilder,
+    @Inject('BASE_URL') private baseUrl: string
+  ) {
+    // get the to do items from the server
+
+    // set the form
+    this.form = this.fb.group({
+    });
+  }
+
+  setFormItems() {
+    this.form = this.fb.group()
+  }
+
+  // mark as complete
+
+  // edit
+
+  // delete
+
+  // add new
+
+  // see section
+
 
   //resultItem: ListItem;
   //resultItems: any;
