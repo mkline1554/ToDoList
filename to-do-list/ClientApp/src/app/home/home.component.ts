@@ -47,14 +47,28 @@ export class HomeComponent {
   }
 
   delete(itemId: number) {
-    this.listItemservice.delete(itemId).
-      subscribe((response) => {
+    this.listItemservice.delete(itemId)
+      .subscribe((response) => {
         this.setListItems(response);
       });
   }
 
-  update(event: any) {
-    console.log(event);
+  complete(item: ListItem) {
+    console.log(item);
+    this.listItemservice.complete(item)
+      .subscribe((response) => {
+        console.log(response);
+        this.setListItems(response);
+      }); 
+  }
+
+  update(item: ListItem) {
+    console.log(item);
+    this.listItemservice.update(item)
+      .subscribe((response) => {
+        console.log(response);
+        this.setListItems(response);
+      })
   }
 
   openUpdateModal(event: any) {

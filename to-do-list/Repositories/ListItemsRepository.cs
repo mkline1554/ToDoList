@@ -29,7 +29,7 @@ namespace to_do_list.Repositories
             return item;
         }
 
-        public ListItem Update(ListItem item)
+        public IEnumerable<ListItem> Update(ListItem item)
         {
             ListItem existingItem = this.context.ListItems.FirstOrDefault(li => li.Id == item.Id);
 
@@ -37,7 +37,13 @@ namespace to_do_list.Repositories
             this.context.ListItems.Update(existingItem);
             this.context.SaveChanges();
 
-            return existingItem;
+            return this.Get();
+        }
+
+        public IEnumerable<ListItem> Complete(ListItem item)
+        {
+            item.Completed = DateTime.Now;
+            return this.Update(item);
         }
 
         public IEnumerable<ListItem> Delete(int id)

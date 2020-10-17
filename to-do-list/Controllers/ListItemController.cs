@@ -35,9 +35,13 @@ namespace to_do_list.Controllers
             return this.Get();
         }
 
-        [HttpPut("[action]")]
-        public ListItem Update(ListItem item) =>
+        [HttpPut]
+        public IEnumerable<ListItem> Update(ListItem item) =>
             this.listItemsRepo.Update(item);
+
+        [HttpPut("[action]")]
+        public IEnumerable<ListItem> Complete(ListItem item) =>
+            this.listItemsRepo.Complete(item);
 
         [HttpDelete("{id}")]
         public IEnumerable<ListItem> Delete(int id) =>

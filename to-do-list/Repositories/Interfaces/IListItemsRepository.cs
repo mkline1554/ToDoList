@@ -9,6 +9,7 @@ namespace to_do_list.Repositories
         IEnumerable<ListItem> Delete(int id);
         IEnumerable<ListItem> Get();
         ListItem Get(int id);
-        ListItem Update(ListItem item);
+        IEnumerable<ListItem> Update(ListItem item);
+        IEnumerable<ListItem> Complete(ListItem item);
     }
 }

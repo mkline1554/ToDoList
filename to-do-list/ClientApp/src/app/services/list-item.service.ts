@@ -38,4 +38,8 @@ export class ListItemService {
   delete(id: number): Observable<any> {
     return this.http.delete('/api/listitem/' + id);
   }
+
+  complete(listItem: ListItem): Observable<any> {
+    return this.http.put('/api/listitem/complete/', listItem);
+  }
 }
