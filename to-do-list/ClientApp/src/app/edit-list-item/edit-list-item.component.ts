@@ -1,8 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, Inject, EventEmitter } from '@angular/core';
 import { ListItem } from '../models/listItem.model';
 import { ListItemService } from '../services/list-item.service';
 import { NgxSmartModalService } from 'ngx-smart-modal';
-import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'edit-list-item',
@@ -14,20 +13,30 @@ export class EditListItemComponent {
   @Input() editItem: ListItem;
   @Output() listItemEdited: EventEmitter<any> = new EventEmitter<any>();
 
-  form: NgForm;
+  isLoaded: boolean = false;
 
   constructor(
+    @Inject('IMPORTANCEOPTIONS') private importanceOptions,
+    @Inject('TYPEOPTIONS') private typeOptions,
+    @Inject('SORTBYOPTIONS') private sortByOptions,
     private listItemService: ListItemService,
     private modalService: NgxSmartModalService) {
-
   }
 
-  onEditItem(form: NgForm) {
+  onEditItem() {
     this.listItemService.update(this.editItem)
       .subscribe((response) => {
         this.listItemEdited.emit(response);
       });
     this.modalService.getModal('editListItem').close();
+    this.isLoaded = false;
+  }
+
+  parseDate(dateString: string): Date {
+    if (dateString) {
+      return new Date(dateString);
+    }
+    return null;
   }
 
 }

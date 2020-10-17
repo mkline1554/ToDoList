@@ -10,6 +10,7 @@ import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
 import { ListItemService } from './services/list-item.service';
 import { EditListItemComponent } from './edit-list-item/edit-list-item.component';
 import { ImportanceOptions, TypeOptions, SortByOptions } from './global/enums-and-constants';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ImportanceOptions, TypeOptions, SortByOptions } from './global/enums-an
   providers: [
     NgxSmartModalService,
     ListItemService,
+    DatePipe,
     { provide: 'IMPORTANCEOPTIONS', useValue: ImportanceOptions },
     { provide: 'TYPEOPTIONS', useValue: TypeOptions },
     { provide: 'SORTBYOPTIONS', useValue: SortByOptions }

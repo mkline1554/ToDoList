@@ -14,7 +14,7 @@ import { ListItemService } from '../services/list-item.service';
   styleUrls:['./home.component.css']
 })
 export class HomeComponent {
-  editItem: ListItem = null;
+  editItem: ListItem = new ListItem();
 
   activeItems: Array<ListItem> = [];
   completedItems: Array<ListItem> = [];
@@ -26,9 +26,6 @@ export class HomeComponent {
   upcomingItems: Array<ListItem> = [];
 
   today: Date = new Date;
-
-  hideAddListItem: boolean = true;
-  hideEditListItem: boolean = true;
 
   constructor(
     private http: HttpClient,
@@ -42,19 +39,11 @@ export class HomeComponent {
     });
   }
 
-  onListItemAdded(event: any) {
-    this.hideAddListItem = true;
-    this.modalService.getModal('addListItem').close();
-    this.setListItems(event);
-  }
-
   openAddItemModal() {
-    this.hideAddListItem = false;
     this.modalService.getModal('addListItem').open();
   }
 
   openEditItemModal() {
-    this.hideEditListItem = false;
     this.modalService.getModal('editListItem').open();
   }
 
@@ -96,23 +85,11 @@ export class HomeComponent {
   }
 
   update(item: ListItem) {
-    console.log(item);
     this.listItemservice.update(item)
       .subscribe((response) => {
-        console.log(response);
         this.setListItems(response);
       })
   }
-
-
-
-  // mark as complete
-
-  // edit
-
-  // delete
-
-  // add new
 
   // see section
 

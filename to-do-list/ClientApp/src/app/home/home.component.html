@@ -107,24 +107,21 @@
           </li>
         </ul>
 
-
-
       </div>
-
     </div>
 
     <ngx-smart-modal #addListItemModal
                      [closable]="true"
                      [dismissable]="true"
                      identifier="addListItem">
-      <add-list-item (listItemAdded)="onListItemAdded($event)"></add-list-item>
+      <add-list-item (listItemAdded)="setListItems($event)"></add-list-item>
     </ngx-smart-modal>
 
     <ngx-smart-modal #editListItemModal
                      [closable]="true"
                      [dismissable]="true"
                      identifier="editListItem">
-      <edit-list-item [editItem]="editItem" (listItemEdited)="onlistItemEdited($event)"></edit-list-item>
+      <edit-list-item [editItem]="editItem" (listItemEdited)="setListItems($event)"></edit-list-item>
     </ngx-smart-modal>
 
   </div>
