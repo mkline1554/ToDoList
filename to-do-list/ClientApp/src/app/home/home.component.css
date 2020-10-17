@@ -6,13 +6,11 @@
   border-radius: 0 5px 5px 0;
   max-height: 80vh;
   overflow: scroll;
-  border-top: 3px solid #ddd;
   border-right: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
 }
 
 .menu {
-  border-top: 3px solid #ddd;
   border-left: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   border-radius: 5px 0 0 5px;
@@ -35,8 +33,18 @@
   margin: 0;
 }
 
+.list-group-item:first-child {
+    border-top-right-radius: 0 !important;
+}
+
+.list-group-item:last-child {
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
 .to-do-item{
     box-shadow: 1px 1px 1px black;
+    margin-bottom: 1vh;
 }
 
 .manage{
@@ -54,11 +62,32 @@
 .get-started {
   color: #fff;
   text-shadow: 2px 2px 3px black;
-  margin-top: 20vh;
+  margin-top: 50%;
+  transform: translateY(-50%);
 }
 
 ::-webkit-scrollbar {
   display: none;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+.selected {
+    background-color: #ddd;
+}
+
+.overdue {
+  color: #dc3545;
+}
+
+.due-today {
+  color:#ffc107;
+}
+
+.not-due {
+  color: #007bff;
+}
+
+.complete {
+  color: #28a745;
 }

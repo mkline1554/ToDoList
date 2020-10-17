@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ListItem } from '../models/listItem.model';
 import { DueByWindow } from '../global/enums-and-constants';
 import { NgxSmartModalService, NgxSmartModalComponent } from 'ngx-smart-modal';
@@ -16,7 +15,10 @@ import { ListItemService } from '../services/list-item.service';
 export class HomeComponent {
   editItem: ListItem = new ListItem();
 
+  allItems: Array<ListItem> = [];
   activeItems: Array<ListItem> = [];
+
+  incompleteItems: Array<ListItem> = [];
   completedItems: Array<ListItem> = [];
   overdueItems: Array<ListItem> = [];
   todayItems: Array<ListItem> = [];
@@ -26,6 +28,11 @@ export class HomeComponent {
   upcomingItems: Array<ListItem> = [];
 
   today: Date = new Date;
+
+  window: number = -1;
+
+  showCompleted: boolean = false;
+  showIncomplete: boolean = true;
 
   constructor(
     private http: HttpClient,
@@ -53,27 +60,61 @@ export class HomeComponent {
   }
 
   setListItems(listItems: Array<ListItem>) {
-    this.activeItems = listItems.filter(i => i.completed == null) as Array<ListItem>;
-    this.completedItems = listItems.filter(i => i.completed != null) as Array<ListItem>;
+    this.allItems = listItems as Array<ListItem>;
 
-    this.overdueItems = listItems.filter(i => i.dueBy == DueByWindow.Overdue &&
-        i.completed == null) as Array<ListItem>;
-    this.todayItems = listItems.filter(i => i.dueBy == DueByWindow.Today &&
-      i.completed == null) as Array<ListItem>;
-    this.tomorrowItems = listItems.filter(i => i.dueBy == DueByWindow.Tomorrow &&
-      i.completed == null) as Array<ListItem>;
-    this.thisWeekItems = listItems.filter(i => i.dueBy == DueByWindow.ThisWeek &&
-      i.completed == null) as Array<ListItem>;
-    this.nextWeekItems = listItems.filter(i => i.dueBy == DueByWindow.NextWeek &&
-      i.completed == null) as Array<ListItem>;
-    this.upcomingItems = listItems.filter(i => i.dueBy == DueByWindow.Upcoming &&
-      i.completed == null) as Array<ListItem>;
+    this.setActiveItems();
+    this.setCompleteAndIncomplete();
+    this.setItemsByDueWindow();
+  }
+
+  setActiveItems() {
+    this.activeItems = this.allItems.filter(i => i.completed == null)
+      .sort((a, b) => a.dueBy - b.dueBy);
+  }
+
+  setCompleteAndIncomplete() {
+    this.incompleteItems = this.allItems.filter(i => i.completed == null);
+    this.completedItems = this.allItems.filter(i => i.completed != null);
+  }
+
+  setItemsByDueWindow() {
+    this.overdueItems = this.incompleteItems.filter(i => i.dueBy == DueByWindow.Overdue);
+    this.todayItems = this.incompleteItems.filter(i => i.dueBy == DueByWindow.Today);
+    this.tomorrowItems = this.incompleteItems.filter(i => i.dueBy == DueByWindow.Tomorrow);
+    this.thisWeekItems = this.incompleteItems.filter(i => i.dueBy == DueByWindow.ThisWeek);
+    this.nextWeekItems = this.incompleteItems.filter(i => i.dueBy == DueByWindow.NextWeek);
+    this.upcomingItems = this.incompleteItems.filter(i => i.dueBy == DueByWindow.Upcoming);
+  }
+
+  onRefresh(listItems: Array<ListItem>) {
+    this.setListItems(listItems);
+    this.resetFilters();
+  }
+
+  resetFilters() {
+    if (this.showCompleted) {
+      this.onViewCompleted();
+    } else if (!this.showCompleted && !this.showIncomplete) {
+      this.onViewSpecificDueWindow(this.window);
+    }
+  }
+
+  filterItemsByDueWindow() {
+    this.activeItems = this.allItems.filter(i => i.dueBy == this.window);
+  }
+
+  viewCompletedOnly() {
+    this.activeItems = this.completedItems;
+  }
+
+  viewIncompleted() {
+    this.activeItems = this.incompleteItems;
   }
 
   delete(itemId: number) {
     this.listItemservice.delete(itemId)
       .subscribe((response) => {
-        this.setListItems(response);
+        this.onRefresh(response);
       });
   }
 
@@ -88,9 +129,32 @@ export class HomeComponent {
     this.listItemservice.update(item)
       .subscribe((response) => {
         this.setListItems(response);
-      })
+      });
   }
 
-  // see section
+  onViewSpecificDueWindow(window: number) {
+    this.showCompleted = false;
+    this.showIncomplete = false;
+    this.setDueByWindow(window);
+    this.filterItemsByDueWindow();
+  }
+
+  onViewCompleted() {
+    this.showCompleted = true;
+    this.showIncomplete = false;
+    this.setDueByWindow(-1);
+    this.viewCompletedOnly();
+  }
+
+  onViewIncompleted() {
+    this.showIncomplete = true;
+    this.showCompleted = false;
+    this.setDueByWindow(-1);
+    this.viewIncompleted();
+  }
+
+  setDueByWindow(window: number) {
+    this.window = window;
+  }
 
 }

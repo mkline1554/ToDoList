@@ -11,7 +11,8 @@
       <!-- upon clicking should reove all others that are not withing that due dat section -->
       <ul class="list-group">
         <li class="list-group-item d-flex justify-content-between align-items-center"
-            *ngIf="overdueItems.length > 0">
+            *ngIf="overdueItems.length > 0"
+            [class.selected]="window == 0" (click)="onViewSpecificDueWindow(+$event.target.id)" id="0">
           Overdue
           <span class="badge badge-danger badge-pill">
             {{ overdueItems.length }}
@@ -19,15 +20,17 @@
         </li>
 
         <li class="list-group-item d-flex justify-content-between align-items-center"
-            *ngIf="todayItems.length > 0">
+            *ngIf="todayItems.length > 0"
+            [class.selected]="window == 1" (click)="onViewSpecificDueWindow(+$event.target.id)" id="1">
           Today
-          <span class="badge badge-warning badge-pill">
+          <span class="badge badge-primary badge-pill">
             {{ todayItems.length }}
           </span>
         </li>
 
         <li class="list-group-item d-flex justify-content-between align-items-center"
-            *ngIf="tomorrowItems.length > 0">
+            *ngIf="tomorrowItems.length > 0"
+            [class.selected]="window == 2" (click)="onViewSpecificDueWindow(+$event.target.id)" id="2">
           Tomorrow
           <span class="badge badge-primary badge-pill">
             {{ tomorrowItems.length }}
@@ -35,7 +38,8 @@
         </li>
 
         <li class="list-group-item d-flex justify-content-between align-items-center"
-            *ngIf="thisWeekItems.length > 0">
+            *ngIf="thisWeekItems.length > 0"
+            [class.selected]="window == 3" (click)="onViewSpecificDueWindow(+$event.target.id)" id="3">
           This Week
           <span class="badge badge-primary badge-pill">
             {{ thisWeekItems.length }}
@@ -43,7 +47,8 @@
         </li>
 
         <li class="list-group-item d-flex justify-content-between align-items-center"
-            *ngIf="nextWeekItems.length > 0">
+            *ngIf="nextWeekItems.length > 0"
+            [class.selected]="window == 4" (click)="onViewSpecificDueWindow(+$event.target.id)" id="4">
           Next Week
           <span class="badge badge-primary badge-pill">
             {{ nextWeekItems.length }}
@@ -51,7 +56,8 @@
         </li>
 
         <li class="list-group-item d-flex justify-content-between align-items-center"
-            *ngIf="upcomingItems.length > 0">
+            *ngIf="upcomingItems.length > 0"
+            [class.selected]="window == 5" (click)="onViewSpecificDueWindow(+$event.target.id)" id="5">
           Upcoming
           <span class="badge badge-primary badge-pill">
             {{ upcomingItems.length }}
@@ -59,7 +65,8 @@
         </li>
 
         <li class="list-group-item d-flex justify-content-between align-items-center"
-            *ngIf="completedItems.length > 0">
+            *ngIf="completedItems.length > 0" (click)="onViewCompleted()"
+            [class.selected]="showCompleted">
           View Completed
           <span class="badge badge-success badge-pill">
             {{ completedItems.length }}
@@ -67,17 +74,18 @@
         </li>
 
         <li class="list-group-item d-flex justify-content-between align-items-center"
-            *ngIf="activeItems.length > 0">
-          View Not Completed
+            *ngIf="allItems.length > 0" (click)="onViewIncompleted()"
+            [class.selected]="showIncomplete">
+          View Incompleted
           <span class="badge badge-primary badge-pill">
-            {{ activeItems.length }}
+            {{ incompleteItems.length }}
           </span>
         </li>
       </ul>
 
-      <button type="button" class="btn btn-secondary btn-lg btn-block add-btn" (click)="openAddItemModal()">
-        <i class="fa fa-plus"></i> Add New Item
-      </button>
+        <button type="button" class="btn btn-info btn-lg btn-block add-btn" (click)="openAddItemModal()">
+          <i class="fa fa-plus"></i> Add New Item
+        </button>
 
     </div>
 
@@ -85,12 +93,13 @@
       <div class="container-fluid" style="margin-top: 5vh;">
 
         <h3 class="get-started" *ngIf="activeItems.length < 1;">
-          There are no items on your do-to  list click Add New Item to get started
+          Choose a menu item to get started or add a new to-do item
         </h3>
 
         <ul class="list-group">
+
           <li *ngFor="let item of activeItems;" class="list-group-item to-do-item">
-            <h5 style="display: inline;">
+            <h5 style="display: inline;" [class.overdue]="item.dueBy == 0">
               {{ item.title | slice : 0:30 }}
             </h5>
             -
@@ -102,8 +111,9 @@
               {{ item.type }}
             </p>
             <i class="fa fa-trash manage text-muted" (click)="delete(item.id)"></i>
-            <i class="fa fa-pencil manage text-muted" (click)="onEditClicked(item)"></i>
-            <i class="fa fa-check manage text-muted" (click)="complete(item)"></i>
+            <i class="fa fa-pencil manage text-muted" (click)="onEditClicked(item)" *ngIf="item.completed == null"></i>
+            <i class="fa fa-check manage text-muted" (click)="complete(item)" *ngIf="item.completed == null"></i>
+            <i class="fa fa-check manage complete" *ngIf="item.completed != null"></i>
           </li>
         </ul>
 
@@ -121,7 +131,7 @@
                      [closable]="true"
                      [dismissable]="true"
                      identifier="editListItem">
-      <edit-list-item [editItem]="editItem" (listItemEdited)="setListItems($event)"></edit-list-item>
+      <edit-list-item [editItem]="editItem" (listItemEdited)="onRefresh($event)"></edit-list-item>
     </ngx-smart-modal>
 
   </div>
