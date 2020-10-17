@@ -10,8 +10,8 @@ using to_do_list.Data;
 namespace to_do_list.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201010180240_Initial")]
-    partial class Initial
+    [Migration("20201017145429_Inital")]
+    partial class Inital
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,10 +28,25 @@ namespace to_do_list.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime?>("Completed")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Due")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Importance")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Updated")

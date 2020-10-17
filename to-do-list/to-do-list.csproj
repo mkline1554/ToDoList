@@ -34,10 +34,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\list-item.service.ts" />
     <None Remove="ClientApp\src\app\models\ListItem.model.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\services\list-item.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\listItem.model.ts" />
   </ItemGroup>
 

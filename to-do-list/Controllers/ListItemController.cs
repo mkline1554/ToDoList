@@ -11,11 +11,11 @@ namespace to_do_list.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ListItemsController : ControllerBase
+    public class ListItemController : ControllerBase
     {
         private readonly IListItemsRepository listItemsRepo;
 
-        public ListItemsController(IListItemsRepository listItemsRepo)
+        public ListItemController(IListItemsRepository listItemsRepo)
         {
             this.listItemsRepo = listItemsRepo;
         }
@@ -28,9 +28,12 @@ namespace to_do_list.Controllers
         public ListItem Get(int id) =>
             this.listItemsRepo.Get(id);
 
-        [HttpPost("[action]")]
-        public ListItem Add(ListItem item) =>
+        [HttpPost]
+        public IEnumerable<ListItem> Add(ListItem item)
+        {
             this.listItemsRepo.Add(item);
+            return this.Get();
+        }
 
         [HttpPut("[action]")]
         public ListItem Update(ListItem item) =>

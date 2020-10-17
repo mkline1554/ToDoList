@@ -1,16 +1,18 @@
 export class ListItem {
   id: number = 0;
 
+  title: string = '';
   description: string = '';
-  isRecurring: boolean;
 
-  frequency: Frequency;
-  importance: Importance;
+  importance: string;
+  type: string;
 
   created: Date = new Date;
   updated: Date = new Date;
   due: Date = new Date;
   completed?: Date;
+
+  dueBy: string;
 
   constructor()
   constructor(obj: ListItem)
@@ -18,11 +20,11 @@ export class ListItem {
     if (obj) {
       this.id = obj.id;
 
+      this.title = obj.title;
       this.description = obj.description;
-      this.isRecurring = obj.isRecurring;
 
-      this.frequency = obj.frequency;
       this.importance = obj.importance;
+      this.type = obj.type;
 
       this.created = obj.created;
       this.updated = obj.updated;
@@ -32,16 +34,15 @@ export class ListItem {
   }
 }
 
-export class Category {
-  id: number = 0;
 
-  name: string = '';
-}
-
-export class Type {
-  id: number = 0;
-
-  name: string = '';
+enum Type {
+  Errand,
+  Chore,
+  Work,
+  Task,
+  Personal,
+  Special,
+  Other
 }
 
 enum Importance {

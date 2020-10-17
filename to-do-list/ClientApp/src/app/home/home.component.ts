@@ -1,11 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-//import { ListItem } from '../models/ListItem.model';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ListItem } from '../models/listItem.model';
-//import { ListItem } from '../models/ListItem.model';
-//import { ListItem } from '../models/ListItem.model';
+import { NgxSmartModalService, NgxSmartModalComponent } from 'ngx-smart-modal';
+import { ListItemService } from '../services/list-item.service';
+
 
 @Component({
   selector: 'app-home',
@@ -13,24 +13,48 @@ import { ListItem } from '../models/listItem.model';
   styleUrls:['./home.component.css']
 })
 export class HomeComponent {
-  form: FormGroup;
   listItems: Array<ListItem> = [];
+
+  today: Date = new Date;
+
+  hideAddListItem: boolean = true;
 
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-    @Inject('BASE_URL') private baseUrl: string
+    private listItemservice: ListItemService,
+    public modalService: NgxSmartModalService,
   ) {
-    // get the to do items from the server
-
-    // set the form
-    this.form = this.fb.group({
+    this.listItemservice.get()
+      .subscribe((response) => {
+        this.setListItems(response);
     });
   }
 
-  setFormItems() {
-    this.form = this.fb.group()
+  onListItemAdded(event: any) {
+    this.hideAddListItem = true;
+    this.modalService.getModal('addListItem').close();
+    this.setListItems(event);
   }
+
+  openAddItemModal() {
+    this.hideAddListItem = false;
+    this.modalService.getModal('addListItem').open();
+  }
+
+  setListItems(listItems: Array<ListItem>) {
+    this.listItems = listItems as Array<ListItem>;
+  }
+
+  delete(event: any) {
+    console.log(event);
+  }
+
+  update(event: any) {
+    console.log(event);
+  }
+
+
 
   // mark as complete
 
@@ -41,90 +65,5 @@ export class HomeComponent {
   // add new
 
   // see section
-
-
-  //resultItem: ListItem;
-  //resultItems: any;
-
-  //listItem: ListItem;
-
-
-  ////item: ListItem = new ListItem();
-  //constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-  //  //http.get(baseUrl + 'api/listitems').subscribe(result => {
-  //  //  this.resultItem = result;
-  //  //}, error => console.error(error));
-  //}
-
-  //getNewListItem() {
-  //  this.listItem = new ListItem();
-  //  console.log(this.listItem);
-  //  this.listItem.description = "Test Item";
-  //  console.log(this.listItem);
-  //  return this.listItem;
-  //}
-
-  //updateResultItem() {
-  //  this.resultItem.description = "Updated Description";
-  //  return this.resultItem;
-  //}
-
-  //get() {
-  //  this.http.get(this.baseUrl + 'api/listitems/1')
-  //    .subscribe(result => {
-  //      this.resultItem = result as ListItem;
-  //      console.log(result);
-  //    }, error => {
-  //      console.error(error);
-  //    });
-  //}
-
-  //getAll() {
-  //  this.http.get(this.baseUrl + 'api/listitems')
-  //    .subscribe(result => {
-  //      this.resultItems = result;
-  //      console.log(result);
-  //    }, error => {
-  //      console.error(error);
-  //    });
-  //}
-
-  //add() {
-  //  this.http.post(this.baseUrl + 'api/listitems/add', this.getNewListItem())
-  //    .subscribe(result => {
-  //      this.resultItem = result as ListItem;
-  //      console.log(result);
-  //    }, error => {
-  //      console.error(error);
-  //    });
-  //}
-
-
-  //update() {
-  //  this.http.put(this.baseUrl + 'api/listitems/update', this.updateResultItem())
-  //    .subscribe(result => {
-  //      this.resultItem = result as ListItem;
-  //      console.log(result);
-  //    }, error => {
-  //      console.error(error);
-  //    });
-  //}
-
-  //remove() {
-  //  this.http.delete(this.baseUrl + 'api/listitems/1')
-  //    .subscribe(result => {
-  //      this.resultItems = result;
-  //      console.log(result);
-  //    }, error => {
-  //      console.error(error);
-  //    });
-  //}
-
-
-  ////add() {
-  ////  this.item.description = "Test Add Description";
-  ////  //this.http.post()
-  ////}
-
 
 }

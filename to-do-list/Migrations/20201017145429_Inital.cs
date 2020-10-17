@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace to_do_list.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Inital : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,9 +13,14 @@ namespace to_do_list.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
+                    Importance = table.Column<string>(nullable: true),
+                    Type = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
-                    Updated = table.Column<DateTime>(nullable: false)
+                    Updated = table.Column<DateTime>(nullable: false),
+                    Due = table.Column<DateTime>(nullable: false),
+                    Completed = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {

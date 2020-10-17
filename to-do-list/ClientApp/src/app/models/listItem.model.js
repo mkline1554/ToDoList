@@ -3,16 +3,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var ListItem = /** @class */ (function () {
     function ListItem(obj) {
         this.id = 0;
+        this.title = '';
         this.description = '';
         this.created = new Date;
         this.updated = new Date;
         this.due = new Date;
         if (obj) {
             this.id = obj.id;
+            this.title = obj.title;
             this.description = obj.description;
-            this.isRecurring = obj.isRecurring;
-            this.frequency = obj.frequency;
             this.importance = obj.importance;
+            this.type = obj.type;
             this.created = obj.created;
             this.updated = obj.updated;
             this.due = obj.due;
@@ -22,22 +23,16 @@ var ListItem = /** @class */ (function () {
     return ListItem;
 }());
 exports.ListItem = ListItem;
-var Category = /** @class */ (function () {
-    function Category() {
-        this.id = 0;
-        this.name = '';
-    }
-    return Category;
-}());
-exports.Category = Category;
-var Type = /** @class */ (function () {
-    function Type() {
-        this.id = 0;
-        this.name = '';
-    }
-    return Type;
-}());
-exports.Type = Type;
+var Type;
+(function (Type) {
+    Type[Type["Errand"] = 0] = "Errand";
+    Type[Type["Chore"] = 1] = "Chore";
+    Type[Type["Work"] = 2] = "Work";
+    Type[Type["Task"] = 3] = "Task";
+    Type[Type["Personal"] = 4] = "Personal";
+    Type[Type["Special"] = 5] = "Special";
+    Type[Type["Other"] = 6] = "Other";
+})(Type || (Type = {}));
 var Importance;
 (function (Importance) {
     Importance[Importance["Low"] = 0] = "Low";

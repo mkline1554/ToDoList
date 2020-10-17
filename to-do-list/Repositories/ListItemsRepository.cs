@@ -17,7 +17,7 @@ namespace to_do_list.Repositories
             this.context = context;
         }
 
-        public IEnumerable<ListItem> Get() => this.context.ListItems;
+        public IEnumerable<ListItem> Get() => this.context.ListItems.OrderBy(i => i.Type);
 
         public ListItem Get(int id) => this.context.ListItems.FirstOrDefault(li => li.Id == id);
 

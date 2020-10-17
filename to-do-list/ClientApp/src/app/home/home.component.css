@@ -4,15 +4,29 @@
   background-repeat: no-repeat;
   background-size: 100% 100%;
   border-radius: 0 5px 5px 0;
-  max-height:80vh;
+  max-height: 80vh;
+  overflow: scroll;
+  border-top: 3px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 
 .menu {
   border-top: 3px solid #ddd;
   border-left: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 5px 0 0 5px;
   padding: 0;
+}
+
+.items-container {
+  height: 80vh;
+  margin-top: 3vh;
+}
+
+.home-heading {
+  text-align: center;
+  margin-top: 3vh;
 }
 
 .menu list-group {
@@ -21,12 +35,26 @@
   margin: 0;
 }
 
+.to-do-item{
+    box-shadow: 1px 1px 1px black;
+}
+
 .manage{
     float: right;
     margin: 0 5px;
 }
 .section-button{
     margin-top: 7%;
+}
+.add-btn {
+  position: absolute;
+  bottom: 0;
+  border-radius: 5px 0 0 5px;
+}
+.get-started {
+  color: #fff;
+  text-shadow: 2px 2px 3px black;
+  margin-top: 20vh;
 }
 
 ::-webkit-scrollbar {

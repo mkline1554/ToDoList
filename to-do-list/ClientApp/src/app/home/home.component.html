@@ -1,8 +1,14 @@
+
+
+
+
 <div class="container">
-  <h1 style="text-align:center; margin-top: 5vh;">To-Do List</h1>
-  <div class="row" style="height:80vh; margin-top: 5vh;">
+  <h1 class="home-heading">To-Do List</h1>
+  <div class="row items-container">
     <div class="col-3 menu">
 
+      <!-- due dates -->
+      <!-- upon clicking should reove all others that are not withing that due dat section -->
       <ul class="list-group">
         <li class="list-group-item d-flex justify-content-between align-items-center">
           Cras justo odio
@@ -22,113 +28,62 @@
             1
           </span>
         </li>
+
         <li class="list-group-item d-flex justify-content-between align-items-center">
-          <button type="button" class="btn btn-primary btn-lg btn-block">
-            <i class="fa fa-plus"></i> Add New Item
-          </button>
+          View All
+          <span class="badge badge-primary badge-pill">
+            {{ listItems.length }}
+          </span>
         </li>
       </ul>
 
+      <button type="button" class="btn btn-secondary btn-lg btn-block btn-add" (click)="openAddItemModal()">
+        <i class="fa fa-plus"></i> Add New Item
+      </button>
+
     </div>
 
-    <div class="col-9 items-wrapper" style="overflow:scroll;">
-      <div class="container-fluid" stlye="border: 2px solid yellow;">
+    <div class="col-9 items-wrapper">
+      <div class="container-fluid" style="margin-top: 5vh;">
 
-        <button type="button" class="btn btn-outline-light section-button">
-          Section <i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>
-        </button>
+        <h3 class="get-started" *ngIf="listItems.length < 1;">
+          There are no items on your do-to  list click Add New Item to get started
+        </h3>
+
         <ul class="list-group">
-          <li class="list-group-item">
-            Porta ac consectetur ac <i class="fa fa-trash manage text-muted"></i>
-            <i class="fa fa-pencil manage text-muted"></i> <i class="fa fa-check manage text-muted"></i>
-          </li>
-          <li>
-            Porta ac consectetur ac
-            <i class="fa fa-trash manage text-muted"></i>
+          <li *ngFor="let item of listItems;" class="list-group-item to-do-item">
+            <h5 style="display: inline;">
+              {{ item.title | slice : 0:30 }}
+            </h5>
+            -
+            <p style="display:inline;">
+              {{ item.description | slice : 0:60 }}
+            </p>
+            -
+            <p style="display:inline;">
+              {{ item.type }}
+            </p>
+            <i class="fa fa-trash manage text-muted" (click)="delete($event)"></i>
             <i class="fa fa-pencil manage text-muted"></i>
             <i class="fa fa-check manage text-muted"></i>
           </li>
         </ul>
 
-        <button type="button" class="btn btn-outline-light section-button">
-          Section <i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>
-        </button>
-        <ul class="list-group">
-          <li class="list-group-item">
-            Porta ac consectetur ac <i class="fa fa-trash manage text-muted"></i>
-            <i class="fa fa-pencil manage text-muted"></i> <i class="fa fa-check manage text-muted"></i>
-          </li>
-          <li class="list-group-item">
-            Vestibulum at eros <i class="fa fa-trash manage text-muted"></i>
-            <i class="fa fa-pencil manage text-muted"></i> <i class="fa fa-check manage text-muted"></i>
-          </li>
-          <li class="list-group-item">
-            Porta ac consectetur ac <i class="fa fa-trash manage text-muted"></i>
-            <i class="fa fa-pencil manage text-muted"></i> <i class="fa fa-check manage text-muted"></i>
-          </li>
-          <li class="list-group-item">
-            Vestibulum at eros <i class="fa fa-trash manage text-muted"></i>
-            <i class="fa fa-pencil manage text-muted"></i> <i class="fa fa-check manage text-muted"></i>
-          </li>
-        </ul>
 
-        <button type="button" class="btn btn-outline-light section-button">
-          Section <i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>
-        </button>
-        <ul class="list-group">
-          <li class="list-group-item">
-            Cras justo odio <i class="fa fa-trash manage text-muted"></i>
-          <i class="fa fa-pencil manage text-muted"></i> <i class="fa fa-check manage text-muted"></i>
-          </li>
-        </ul>
-
-        <button type="button" class="btn btn-outline-light section-button">
-          Section <i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>
-        </button>
-        <ul class="list-group">
-          <li class="list-group-item">
-            Porta ac consectetur ac <i class="fa fa-trash manage text-muted"></i>
-          <i class="fa fa-pencil manage text-muted"></i> <i class="fa fa-check manage text-muted"></i>
-          </li>
-          <li class="list-group-item">
-            Vestibulum at eros <i class="fa fa-trash manage text-muted"></i>
-          <i class="fa fa-pencil manage text-muted"></i> <i class="fa fa-check manage text-muted"></i>
-          </li>
-          <li class="list-group-item">
-            Porta ac consectetur ac <i class="fa fa-trash manage text-muted"></i>
-          <i class="fa fa-pencil manage text-muted"></i> <i class="fa fa-check manage text-muted"></i>
-          </li>
-          <li class="list-group-item">
-            Vestibulum at eros <i class="fa fa-trash manage text-muted"></i>
-          <i class="fa fa-pencil manage text-muted"></i> <i class="fa fa-check manage text-muted"></i>
-          </li>
-        </ul>
-
-        <button type="button" class="btn btn-outline-light section-button">
-          Section <i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>
-        </button>
-        <ul class="list-group">
-          <li class="list-group-item">
-            Porta ac consectetur ac <i class="fa fa-trash manage text-muted"></i>
-          <i class="fa fa-pencil manage text-muted"></i> <i class="fa fa-check manage text-muted"></i>
-          </li>
-          <li class="list-group-item">
-            Vestibulum at eros <i class="fa fa-trash manage text-muted"></i>
-          <i class="fa fa-pencil manage text-muted"></i> <i class="fa fa-check manage text-muted"></i>
-          </li>
-          <li class="list-group-item">
-            Porta ac consectetur ac <i class="fa fa-trash manage text-muted"></i>
-          <i class="fa fa-pencil manage text-muted"></i> <i class="fa fa-check manage text-muted"></i>
-          </li>
-          <li class="list-group-item">
-            Vestibulum at eros <i class="fa fa-trash manage text-muted"></i>
-          <i class="fa fa-pencil manage text-muted"></i> <i class="fa fa-check manage text-muted"></i>
-          </li>
-        </ul>
 
       </div>
+
     </div>
 
+    <ngx-smart-modal #addListItemModal
+                     [closable]="true"
+                     [dismissable]="true"
+                     identifier="addListItem">
+
+      <!--<add-list-item [listItem]="listItem"-->
+      <add-list-item (listItemAdded)="onListItemAdded($event)" ></add-list-item>
+    </ngx-smart-modal>
 
   </div>
 </div>
+
