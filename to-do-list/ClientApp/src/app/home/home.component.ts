@@ -46,11 +46,18 @@ export class HomeComponent {
     this.listItems = listItems as Array<ListItem>;
   }
 
-  delete(event: any) {
-    console.log(event);
+  delete(itemId: number) {
+    this.listItemservice.delete(itemId).
+      subscribe((response) => {
+        this.setListItems(response);
+      });
   }
 
   update(event: any) {
+    console.log(event);
+  }
+
+  openUpdateModal(event: any) {
     console.log(event);
   }
 
