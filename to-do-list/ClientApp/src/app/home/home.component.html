@@ -10,7 +10,7 @@
       <!-- due dates -->
       <!-- upon clicking should reove all others that are not withing that due dat section -->
       <ul class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center"
+        <li class="list-group-item d-flex justify-content-between align-items-center pointer-hover"
             *ngIf="overdueItems.length > 0"
             [class.selected]="window == 0" (click)="onViewSpecificDueWindow(+$event.target.id)" id="0">
           Overdue
@@ -19,7 +19,7 @@
           </span>
         </li>
 
-        <li class="list-group-item d-flex justify-content-between align-items-center"
+        <li class="list-group-item d-flex justify-content-between align-items-center pointer-hover"
             *ngIf="todayItems.length > 0"
             [class.selected]="window == 1" (click)="onViewSpecificDueWindow(+$event.target.id)" id="1">
           Today
@@ -28,7 +28,7 @@
           </span>
         </li>
 
-        <li class="list-group-item d-flex justify-content-between align-items-center"
+        <li class="list-group-item d-flex justify-content-between align-items-center pointer-hover"
             *ngIf="tomorrowItems.length > 0"
             [class.selected]="window == 2" (click)="onViewSpecificDueWindow(+$event.target.id)" id="2">
           Tomorrow
@@ -37,7 +37,7 @@
           </span>
         </li>
 
-        <li class="list-group-item d-flex justify-content-between align-items-center"
+        <li class="list-group-item d-flex justify-content-between align-items-center pointer-hover"
             *ngIf="thisWeekItems.length > 0"
             [class.selected]="window == 3" (click)="onViewSpecificDueWindow(+$event.target.id)" id="3">
           This Week
@@ -46,7 +46,7 @@
           </span>
         </li>
 
-        <li class="list-group-item d-flex justify-content-between align-items-center"
+        <li class="list-group-item d-flex justify-content-between align-items-center pointer-hover"
             *ngIf="nextWeekItems.length > 0"
             [class.selected]="window == 4" (click)="onViewSpecificDueWindow(+$event.target.id)" id="4">
           Next Week
@@ -55,7 +55,7 @@
           </span>
         </li>
 
-        <li class="list-group-item d-flex justify-content-between align-items-center"
+        <li class="list-group-item d-flex justify-content-between align-items-center pointer-hover"
             *ngIf="upcomingItems.length > 0"
             [class.selected]="window == 5" (click)="onViewSpecificDueWindow(+$event.target.id)" id="5">
           Upcoming
@@ -64,7 +64,7 @@
           </span>
         </li>
 
-        <li class="list-group-item d-flex justify-content-between align-items-center"
+        <li class="list-group-item d-flex justify-content-between align-items-center pointer-hover"
             *ngIf="completedItems.length > 0" (click)="onViewCompleted()"
             [class.selected]="showCompleted">
           View Completed
@@ -73,7 +73,7 @@
           </span>
         </li>
 
-        <li class="list-group-item d-flex justify-content-between align-items-center"
+        <li class="list-group-item d-flex justify-content-between align-items-center pointer-hover"
             *ngIf="allItems.length > 0" (click)="onViewIncompleted()"
             [class.selected]="showIncomplete">
           View Incompleted
@@ -83,14 +83,14 @@
         </li>
       </ul>
 
-        <button type="button" class="btn btn-info btn-lg btn-block add-btn" (click)="openAddItemModal()">
+        <button type="button" class="btn btn-danger btn-lg btn-block add-btn" (click)="openAddItemModal()">
           <i class="fa fa-plus"></i> Add New Item
         </button>
 
     </div>
 
     <div class="col-9 items-wrapper">
-      <div class="container-fluid" style="margin-top: 5vh;">
+      <div class="container-fluid to-do-items-container">
 
         <h3 class="get-started" *ngIf="activeItems.length < 1;">
           Choose a menu item to get started or add a new to-do item
@@ -99,20 +99,20 @@
         <ul class="list-group">
 
           <li *ngFor="let item of activeItems;" class="list-group-item to-do-item">
-            <h5 style="display: inline;" [class.overdue]="item.dueBy == 0">
+            <h5 class="inline" [class.overdue]="item.dueBy == 0">
               {{ item.title | slice : 0:30 }}
             </h5>
             -
-            <p style="display:inline;">
+            <p class=" inline">
               {{ item.description | slice : 0:60 }}
             </p>
             -
-            <p style="display:inline;">
+            <p class=" inline">
               {{ item.type }}
             </p>
-            <i class="fa fa-trash manage text-muted" (click)="delete(item.id)"></i>
-            <i class="fa fa-pencil manage text-muted" (click)="onEditClicked(item)" *ngIf="item.completed == null"></i>
-            <i class="fa fa-check manage text-muted" (click)="complete(item)" *ngIf="item.completed == null"></i>
+            <i class="fa fa-trash manage pointer-hover red-action" (click)="delete(item.id)"></i>
+            <i class="fa fa-pencil manage pointer-hover gray-action" (click)="onEditClicked(item)" *ngIf="item.completed == null"></i>
+            <i class="fa fa-check manage pointer-hover green-action" (click)="complete(item)" *ngIf="item.completed == null"></i>
             <i class="fa fa-check manage complete" *ngIf="item.completed != null"></i>
           </li>
         </ul>
@@ -122,14 +122,14 @@
 
     <ngx-smart-modal #addListItemModal
                      [closable]="true"
-                     [dismissable]="true"
+                     [dismissable]="false"
                      identifier="addListItem">
       <add-list-item (listItemAdded)="setListItems($event)"></add-list-item>
     </ngx-smart-modal>
 
     <ngx-smart-modal #editListItemModal
                      [closable]="true"
-                     [dismissable]="true"
+                     [dismissable]="false"
                      identifier="editListItem">
       <edit-list-item [editItem]="editItem" (listItemEdited)="onRefresh($event)"></edit-list-item>
     </ngx-smart-modal>

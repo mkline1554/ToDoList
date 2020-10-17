@@ -1,4 +1,4 @@
-<h1>Add New Item</h1>
+<h1 class="modal-title">Add New Item</h1>
 <hr />
 
 <form (ngSubmit)="onAddItem()">
@@ -17,7 +17,7 @@
 
   <div class="form-group">
     <label for="type">Type</label>
-    <select [(ngModel)]="listItem.type" [ngModelOptions]="{standalone: true}">
+    <select [(ngModel)]="listItem.type" [ngModelOptions]="{standalone: true}" class="form-control">
       <option *ngFor="let option of typeOptions; let i = index;"
               [selected]="option.value == listItem.type"
               [value]="option.value">
@@ -29,7 +29,7 @@
 
   <div class="form-group">
     <label for="Importance">Importance</label>
-    <select [(ngModel)]="listItem.importance" [ngModelOptions]="{standalone: true}">
+    <select [(ngModel)]="listItem.importance" [ngModelOptions]="{standalone: true}" class="form-control">
       <option *ngFor="let option of importanceOptions; let i = index;"
               [selected]="option.value == listItem.importance"
               [value]="option.value">
@@ -44,5 +44,5 @@
            [(ngModel)]="listItem.due" [ngModelOptions]="{standalone: true}" />
   </div>
 
-  <button type="submit">Add</button>
+  <button class="btn btn-success btn-block" type="submit">Add</button>
 </form>

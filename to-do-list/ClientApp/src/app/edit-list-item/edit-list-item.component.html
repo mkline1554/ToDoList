@@ -1,4 +1,4 @@
-<h1>Edit Item</h1>
+<h1 class="modal-title">Edit Item</h1>
 <hr />
 
 <form (ngSubmit)="onEditItem()">
@@ -17,7 +17,7 @@
 
   <div class="form-group">
     <label for="type">Type</label>
-    <select [(ngModel)]="editItem.type" [ngModelOptions]="{standalone: true}">
+    <select [(ngModel)]="editItem.type" [ngModelOptions]="{standalone: true}" class="form-control">
       <option *ngFor="let option of typeOptions; let i = index;"
               [selected]="option.value == editItem.type"
               [value]="option.value">
@@ -29,7 +29,7 @@
 
   <div class="form-group">
     <label for="Importance">Importance</label>
-    <select [(ngModel)]="editItem.importance" [ngModelOptions]="{standalone: true}">
+    <select [(ngModel)]="editItem.importance" [ngModelOptions]="{standalone: true}" class="form-control">
       <option *ngFor="let option of importanceOptions; let i = index;"
               [selected]="option.value == editItem.importance"
               [value]="option.value">
@@ -45,5 +45,5 @@
            (input)="editItem.due = parseDate($event.target.value)" />
   </div>
 
-  <button type="submit">Edit</button>
+  <button class="btn btn-success btn-block" type="submit">Update</button>
 </form>

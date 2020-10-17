@@ -24,12 +24,9 @@ export class AddListItemComponent {
   }
 
   onAddItem() {
-    this.listItemService.add(this.listItem)
-      .subscribe((response) => {
-        this.listItemAdded.emit(response);
-      });
-
-    this.modalService.getModal('addListItem').close();
+    this.add();
+    this.resetModel();
+    this.close();
   }
 
   add() {

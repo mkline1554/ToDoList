@@ -24,12 +24,19 @@ export class EditListItemComponent {
   }
 
   onEditItem() {
+    this.edit();
+    this.close();
+  }
+
+  edit() {
     this.listItemService.update(this.editItem)
       .subscribe((response) => {
         this.listItemEdited.emit(response);
       });
+  }
+
+  close() {
     this.modalService.getModal('editListItem').close();
-    this.isLoaded = false;
   }
 
   parseDate(dateString: string): Date {

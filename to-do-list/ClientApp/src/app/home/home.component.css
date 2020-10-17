@@ -22,6 +22,14 @@
   margin-top: 3vh;
 }
 
+.to-do-items-container {
+  margin-top: 5vh;
+}
+
+.inline {
+  display: inline;
+}
+
 .home-heading {
   text-align: center;
   margin-top: 3vh;
@@ -31,6 +39,31 @@
   width: 100%;
   padding: 0;
   margin: 0;
+}
+
+.pointer-hover:hover {
+    cursor:pointer;
+}
+
+.gray-action,
+.red-action,
+.green-action {
+  color: #6c757d;
+}
+
+.red-action:hover,
+.red-action:focus {
+  color:#c82333;
+}
+
+.gray-action:hover,
+.gray-action:focus {
+  color: #212529;
+}
+
+.green-action:hover,
+.green-action:focus{
+  color: #218838;
 }
 
 .list-group-item:first-child {
