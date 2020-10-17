@@ -1,7 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Inject, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ListItem } from '../models/listItem.model';
-import { HttpClient } from '@angular/common/http';
 import { ListItemService } from '../services/list-item.service';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 
@@ -16,12 +15,15 @@ export class AddListItemComponent {
 
   listItem: ListItem = new ListItem();
   form: NgForm;
-  importanceOptions: Array<string> = ['Low', 'Medium', 'High'];
-  typeOptions: Array<string> = ['Errand', 'Chore', 'Work', 'Task', 'Personal', 'Special', 'Other'];
-  sortByOptions: Array<string> = ['Due Date', 'Importance', 'Type'];
+  //importanceOptions: Array<string> = ['Low', 'Medium', 'High'];
+  //typeOptions: Array<string> = ['Errand', 'Chore', 'Work', 'Task', 'Personal', 'Special', 'Other'];
+  //sortByOptions: Array<string> = ['Due Date', 'Importance', 'Type'];
 
 
   constructor(
+    @Inject('IMPORTANCEOPTIONS') private importanceOptions,
+    @Inject('TYPEOPTIONS') private typeOptions,
+    @Inject('SORTBYOPTIONS') private sortByOptions,
     private listItemService: ListItemService,
     public modalService: NgxSmartModalService) {
 
@@ -34,6 +36,21 @@ export class AddListItemComponent {
       });
 
     this.modalService.getModal('addListItem').close();
+  }
+
+  add() {
+    this.listItemService.add(this.listItem)
+      .subscribe((response) => {
+        this.listItemAdded.emit(response);
+      });
+  }
+
+  close() {
+    this.modalService.getModal('addListItem').close();
+  }
+
+  resetModel() {
+    this.listItem = new ListItem();
   }
 
 }

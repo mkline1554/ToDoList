@@ -2,7 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ListItem, DueByWindow } from '../models/listItem.model';
+import { ListItem } from '../models/listItem.model';
+import { DueByWindow } from '../global/enums-and-constants';
 import { NgxSmartModalService, NgxSmartModalComponent } from 'ngx-smart-modal';
 import { ListItemService } from '../services/list-item.service';
 
@@ -13,6 +14,8 @@ import { ListItemService } from '../services/list-item.service';
   styleUrls:['./home.component.css']
 })
 export class HomeComponent {
+  editItem: ListItem = null;
+
   activeItems: Array<ListItem> = [];
   completedItems: Array<ListItem> = [];
   overdueItems: Array<ListItem> = [];
@@ -25,6 +28,7 @@ export class HomeComponent {
   today: Date = new Date;
 
   hideAddListItem: boolean = true;
+  hideEditListItem: boolean = true;
 
   constructor(
     private http: HttpClient,
@@ -47,6 +51,16 @@ export class HomeComponent {
   openAddItemModal() {
     this.hideAddListItem = false;
     this.modalService.getModal('addListItem').open();
+  }
+
+  openEditItemModal() {
+    this.hideEditListItem = false;
+    this.modalService.getModal('editListItem').open();
+  }
+
+  onEditClicked(item: ListItem) {
+    this.editItem = item;
+    this.openEditItemModal();
   }
 
   setListItems(listItems: Array<ListItem>) {
@@ -88,10 +102,6 @@ export class HomeComponent {
         console.log(response);
         this.setListItems(response);
       })
-  }
-
-  openUpdateModal(event: any) {
-    console.log(event);
   }
 
 

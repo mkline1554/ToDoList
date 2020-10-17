@@ -102,7 +102,7 @@
               {{ item.type }}
             </p>
             <i class="fa fa-trash manage text-muted" (click)="delete(item.id)"></i>
-            <i class="fa fa-pencil manage text-muted"></i>
+            <i class="fa fa-pencil manage text-muted" (click)="onEditClicked(item)"></i>
             <i class="fa fa-check manage text-muted" (click)="complete(item)"></i>
           </li>
         </ul>
@@ -117,9 +117,14 @@
                      [closable]="true"
                      [dismissable]="true"
                      identifier="addListItem">
+      <add-list-item (listItemAdded)="onListItemAdded($event)"></add-list-item>
+    </ngx-smart-modal>
 
-      <!--<add-list-item [listItem]="listItem"-->
-      <add-list-item (listItemAdded)="onListItemAdded($event)" ></add-list-item>
+    <ngx-smart-modal #editListItemModal
+                     [closable]="true"
+                     [dismissable]="true"
+                     identifier="editListItem">
+      <edit-list-item [editItem]="editItem" (listItemEdited)="onlistItemEdited($event)"></edit-list-item>
     </ngx-smart-modal>
 
   </div>

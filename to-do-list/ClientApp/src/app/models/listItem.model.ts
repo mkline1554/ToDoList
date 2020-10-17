@@ -1,3 +1,5 @@
+import { DueByWindow } from "../global/enums-and-constants";
+
 export class ListItem {
   id: number = 0;
 
@@ -32,39 +34,4 @@ export class ListItem {
       this.completed = obj.completed;
     }
   }
-}
-
-
-enum Type {
-  Errand,
-  Chore,
-  Work,
-  Task,
-  Personal,
-  Special,
-  Other
-}
-
-enum Importance {
-  Low,
-  Medium,
-  High
-}
-
-enum Frequency {
-  Daily,
-  Weekly,
-  BiWeekly,
-  Monthly,
-  Quarterly,
-  Yearly
-}
-
-export enum DueByWindow {
-  Overdue,
-  Today,
-  Tomorrow,
-  ThisWeek,
-  NextWeek,
-  Upcoming
 }
