@@ -10,34 +10,72 @@
       <!-- due dates -->
       <!-- upon clicking should reove all others that are not withing that due dat section -->
       <ul class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Cras justo odio
-          <span class="badge badge-primary badge-pill">
-            14
-          </span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Dapibus ac facilisis in
-          <span class="badge badge-primary badge-pill">
-            2
-          </span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Morbi leo risus
-          <span class="badge badge-primary badge-pill">
-            1
+        <li class="list-group-item d-flex justify-content-between align-items-center"
+            *ngIf="overdueItems.length > 0">
+          Overdue
+          <span class="badge badge-danger badge-pill">
+            {{ overdueItems.length }}
           </span>
         </li>
 
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          View All
+        <li class="list-group-item d-flex justify-content-between align-items-center"
+            *ngIf="todayItems.length > 0">
+          Today
+          <span class="badge badge-warning badge-pill">
+            {{ todayItems.length }}
+          </span>
+        </li>
+
+        <li class="list-group-item d-flex justify-content-between align-items-center"
+            *ngIf="tomorrowItems.length > 0">
+          Tomorrow
           <span class="badge badge-primary badge-pill">
-            {{ listItems.length }}
+            {{ tomorrowItems.length }}
+          </span>
+        </li>
+
+        <li class="list-group-item d-flex justify-content-between align-items-center"
+            *ngIf="thisWeekItems.length > 0">
+          This Week
+          <span class="badge badge-primary badge-pill">
+            {{ thisWeekItems.length }}
+          </span>
+        </li>
+
+        <li class="list-group-item d-flex justify-content-between align-items-center"
+            *ngIf="nextWeekItems.length > 0">
+          Next Week
+          <span class="badge badge-primary badge-pill">
+            {{ nextWeekItems.length }}
+          </span>
+        </li>
+
+        <li class="list-group-item d-flex justify-content-between align-items-center"
+            *ngIf="upcomingItems.length > 0">
+          Upcoming
+          <span class="badge badge-primary badge-pill">
+            {{ upcomingItems.length }}
+          </span>
+        </li>
+
+        <li class="list-group-item d-flex justify-content-between align-items-center"
+            *ngIf="completedItems.length > 0">
+          View Completed
+          <span class="badge badge-success badge-pill">
+            {{ completedItems.length }}
+          </span>
+        </li>
+
+        <li class="list-group-item d-flex justify-content-between align-items-center"
+            *ngIf="activeItems.length > 0">
+          View Not Completed
+          <span class="badge badge-primary badge-pill">
+            {{ activeItems.length }}
           </span>
         </li>
       </ul>
 
-      <button type="button" class="btn btn-secondary btn-lg btn-block btn-add" (click)="openAddItemModal()">
+      <button type="button" class="btn btn-secondary btn-lg btn-block add-btn" (click)="openAddItemModal()">
         <i class="fa fa-plus"></i> Add New Item
       </button>
 
@@ -46,12 +84,12 @@
     <div class="col-9 items-wrapper">
       <div class="container-fluid" style="margin-top: 5vh;">
 
-        <h3 class="get-started" *ngIf="listItems.length < 1;">
+        <h3 class="get-started" *ngIf="activeItems.length < 1;">
           There are no items on your do-to  list click Add New Item to get started
         </h3>
 
         <ul class="list-group">
-          <li *ngFor="let item of listItems;" class="list-group-item to-do-item">
+          <li *ngFor="let item of activeItems;" class="list-group-item to-do-item">
             <h5 style="display: inline;">
               {{ item.title | slice : 0:30 }}
             </h5>

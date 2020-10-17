@@ -48,4 +48,13 @@ var Frequency;
     Frequency[Frequency["Quarterly"] = 4] = "Quarterly";
     Frequency[Frequency["Yearly"] = 5] = "Yearly";
 })(Frequency || (Frequency = {}));
+var DueByWindow;
+(function (DueByWindow) {
+    DueByWindow[DueByWindow["Overdue"] = 0] = "Overdue";
+    DueByWindow[DueByWindow["Today"] = 1] = "Today";
+    DueByWindow[DueByWindow["Tomorrow"] = 2] = "Tomorrow";
+    DueByWindow[DueByWindow["ThisWeek"] = 3] = "ThisWeek";
+    DueByWindow[DueByWindow["NextWeek"] = 4] = "NextWeek";
+    DueByWindow[DueByWindow["Upcoming"] = 5] = "Upcoming";
+})(DueByWindow = exports.DueByWindow || (exports.DueByWindow = {}));
 //# sourceMappingURL=listItem.model.js.map

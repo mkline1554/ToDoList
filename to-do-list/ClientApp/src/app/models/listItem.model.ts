@@ -12,7 +12,7 @@ export class ListItem {
   due: Date = new Date;
   completed?: Date;
 
-  dueBy: string;
+  dueBy: DueByWindow;
 
   constructor()
   constructor(obj: ListItem)
@@ -58,4 +58,13 @@ enum Frequency {
   Monthly,
   Quarterly,
   Yearly
+}
+
+export enum DueByWindow {
+  Overdue,
+  Today,
+  Tomorrow,
+  ThisWeek,
+  NextWeek,
+  Upcoming
 }

@@ -22,7 +22,7 @@ namespace to_do_list.Models
         public DateTime Due { get; set; }
         public DateTime? Completed { get; set; }
 
-        public string DueBy => this.DetermineDueDate();
+        public DueByWindow DueBy => this.DetermineDueDate();
 
         public void Update(ListItem obj)
         {
@@ -39,7 +39,7 @@ namespace to_do_list.Models
             }
         }
 
-        private string DetermineDueDate()
+        private DueByWindow DetermineDueDate()
         {
             var today = DateTime.Now.Date;
             var thisWeekStart = today.AddDays(-(int)today.DayOfWeek);
@@ -48,24 +48,30 @@ namespace to_do_list.Models
 
             if (today > due)
             {
-                return "OverDue";
-            } else if (today.AddDays(1) > due)
+                return DueByWindow.Overdue;
+            } 
+            else if (today.AddDays(1) > due)
             {
-                return "Today";
-            } else if (today.AddDays(2) > due)
+                return DueByWindow.Today;
+            } 
+            else if (today.AddDays(2) > due)
             {
-                return "Tomorrow";
-            } else if (thisWeekEnd > due)
+                return DueByWindow.Tomorrow;
+            } 
+            else if (thisWeekEnd > due)
             {
-                return "This Week";
-            } else if (thisWeekEnd.AddDays(7) > due)
+                return DueByWindow.ThisWeek;
+            } 
+            else if (thisWeekEnd.AddDays(7) > due)
             {
-                return "Next Week";
-            } else
+                return DueByWindow.NextWeek;
+            } 
+            else
             {
-                return "Upcoming";
+                return DueByWindow.Upcoming;
             }
         }
+
     }
 }
 
@@ -77,16 +83,6 @@ public enum Importance
     High
 }
 
-public enum Frequency
-{
-    Daily,
-    Weekly,
-    BiWeekly,
-    Monthly,
-    Quarterly,
-    Yearly
-}
-
 public enum Type
 {
     Errand,
@@ -96,4 +92,14 @@ public enum Type
     Personal,
     Special,
     Other
+}
+
+public enum DueByWindow
+{
+    Overdue,
+    Today,
+    Tomorrow,
+    ThisWeek,
+    NextWeek,
+    Upcoming
 }
