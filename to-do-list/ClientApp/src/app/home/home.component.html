@@ -1,14 +1,8 @@
-
-
-
-
 <div class="container">
   <h1 class="home-heading">To-Do List</h1>
   <div class="row items-container">
     <div class="col-3 menu">
 
-      <!-- due dates -->
-      <!-- upon clicking should reove all others that are not withing that due dat section -->
       <ul class="list-group">
         <li class="list-group-item d-flex justify-content-between align-items-center pointer-hover"
             *ngIf="overdueItems.length > 0"
@@ -76,14 +70,14 @@
         <li class="list-group-item d-flex justify-content-between align-items-center pointer-hover"
             *ngIf="allItems.length > 0" (click)="onViewIncompleted()"
             [class.selected]="showIncomplete">
-          View Incompleted
+          View Incomplete
           <span class="badge badge-primary badge-pill">
             {{ incompleteItems.length }}
           </span>
         </li>
       </ul>
 
-        <button type="button" class="btn btn-danger btn-lg btn-block add-btn" (click)="openAddItemModal()">
+        <button type="button" class="btn btn-info btn-lg btn-block add-btn" (click)="openAddItemModal()">
           <i class="fa fa-plus"></i> Add New Item
         </button>
 
@@ -120,19 +114,13 @@
       </div>
     </div>
 
-    <ngx-smart-modal #addListItemModal
-                     [closable]="true"
-                     [dismissable]="false"
-                     identifier="addListItem">
-      <add-list-item (listItemAdded)="setListItems($event)"></add-list-item>
-    </ngx-smart-modal>
+    <div [class.modal]="!showAddItemModal" class="item-modal">
+      <add-list-item (listItemAdded)="onItemAdded($event)"></add-list-item>
+    </div>
 
-    <ngx-smart-modal #editListItemModal
-                     [closable]="true"
-                     [dismissable]="false"
-                     identifier="editListItem">
-      <edit-list-item [editItem]="editItem" (listItemEdited)="onRefresh($event)"></edit-list-item>
-    </ngx-smart-modal>
+    <div [class.modal]="!showEditItemModal" class="item-modal">
+      <edit-list-item [editItem]="editItem" (listItemEdited)="onItemEdited($event)"></edit-list-item>
+    </div>
 
   </div>
 </div>

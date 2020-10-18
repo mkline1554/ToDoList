@@ -1,48 +1,51 @@
-<h1 class="modal-title">Add New Item</h1>
-<hr />
 
-<form (ngSubmit)="onAddItem()">
+  <div class="modal-container">
+    <h1 class="modal-title">Add New Item</h1>
+    <hr />
 
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input type="text" id="title" class="form-control" name="title"
-           [(ngModel)]="listItem.title" [ngModelOptions]="{standalone: true}" />
+    <form (ngSubmit)="onAddItem()">
+
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" class="form-control" name="title"
+               [(ngModel)]="listItem.title" [ngModelOptions]="{standalone: true}" />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" id="description" class="form-control"
+               name="description" [(ngModel)]="listItem.description" [ngModelOptions]="{standalone: true}" />
+      </div>
+
+      <div class="form-group">
+        <label for="type">Type</label>
+        <select [(ngModel)]="listItem.type" [ngModelOptions]="{standalone: true}" class="form-control">
+          <option *ngFor="let option of typeOptions; let i = index;"
+                  [selected]="option.value == listItem.type"
+                  [value]="option.value">
+            {{ option.name }}
+          </option>
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <label for="Importance">Importance</label>
+        <select [(ngModel)]="listItem.importance" [ngModelOptions]="{standalone: true}" class="form-control">
+          <option *ngFor="let option of importanceOptions; let i = index;"
+                  [selected]="option.value == listItem.importance"
+                  [value]="option.value">
+            {{ option.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="due">Due Date</label>
+        <input type="date" id="due" class="form-control" name="due"
+               [(ngModel)]="listItem.due" [ngModelOptions]="{standalone: true}" />
+      </div>
+
+      <button class="btn btn-success btn-block" type="submit">Add</button>
+    </form>
   </div>
-
-  <div class="form-group">
-    <label for="description">Description</label>
-    <input type="text" id="description" class="form-control"
-           name="description" [(ngModel)]="listItem.description" [ngModelOptions]="{standalone: true}" />
-  </div>
-
-  <div class="form-group">
-    <label for="type">Type</label>
-    <select [(ngModel)]="listItem.type" [ngModelOptions]="{standalone: true}" class="form-control">
-      <option *ngFor="let option of typeOptions; let i = index;"
-              [selected]="option.value == listItem.type"
-              [value]="option.value">
-        {{ option.name }}
-      </option>
-    </select>
-  </div>
-
-
-  <div class="form-group">
-    <label for="Importance">Importance</label>
-    <select [(ngModel)]="listItem.importance" [ngModelOptions]="{standalone: true}" class="form-control">
-      <option *ngFor="let option of importanceOptions; let i = index;"
-              [selected]="option.value == listItem.importance"
-              [value]="option.value">
-        {{ option.name }}
-      </option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label for="due">Due Date</label>
-    <input type="date" id="due" class="form-control" name="due"
-           [(ngModel)]="listItem.due" [ngModelOptions]="{standalone: true}" />
-  </div>
-
-  <button class="btn btn-success btn-block" type="submit">Add</button>
-</form>

@@ -15,11 +15,20 @@
   border-bottom: 1px solid #ddd;
   border-radius: 5px 0 0 5px;
   padding: 0;
+  background: #fff;
 }
 
 .items-container {
   height: 80vh;
   margin-top: 3vh;
+  position: relative;
+}
+
+.item-modal {
+  position: absolute;
+  background: #333e;
+  width: 100%;
+  height: 100%;
 }
 
 .to-do-items-container {
@@ -33,6 +42,7 @@
 .home-heading {
   text-align: center;
   margin-top: 3vh;
+  color: #555;
 }
 
 .menu list-group {

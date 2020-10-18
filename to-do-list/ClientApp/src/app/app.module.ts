@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AddListItemComponent } from './add-list-item/add-list-item.component';
-import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
+//import { NgxSmartModalModule, NgxSmartModalService, NgxSmartModalComponent } from 'ngx-smart-modal';
 import { ListItemService } from './services/list-item.service';
 import { EditListItemComponent } from './edit-list-item/edit-list-item.component';
 import { ImportanceOptions, TypeOptions, SortByOptions } from './global/enums-and-constants';
@@ -17,23 +17,22 @@ import { DatePipe } from '@angular/common';
     AppComponent,
     HomeComponent,
     AddListItemComponent,
-    EditListItemComponent,
+    EditListItemComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxSmartModalModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' }
     ])
   ],
   exports: [
-    AddListItemComponent
+    AddListItemComponent,
+    RouterModule
   ],
   providers: [
-    NgxSmartModalService,
     ListItemService,
     DatePipe,
     { provide: 'IMPORTANCEOPTIONS', useValue: ImportanceOptions },

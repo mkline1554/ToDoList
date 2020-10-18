@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { ListItem } from '../models/listItem.model';
 import { DueByWindow } from '../global/enums-and-constants';
-import { NgxSmartModalService, NgxSmartModalComponent } from 'ngx-smart-modal';
 import { ListItemService } from '../services/list-item.service';
 
 
@@ -34,11 +33,13 @@ export class HomeComponent {
   showCompleted: boolean = false;
   showIncomplete: boolean = true;
 
+  showAddItemModal: boolean = false;
+  showEditItemModal: boolean = false;
+
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
     private listItemservice: ListItemService,
-    public modalService: NgxSmartModalService,
   ) {
     this.listItemservice.get()
       .subscribe((response) => {
@@ -47,11 +48,11 @@ export class HomeComponent {
   }
 
   openAddItemModal() {
-    this.modalService.getModal('addListItem').open();
+    this.showAddItemModal = true;
   }
 
   openEditItemModal() {
-    this.modalService.getModal('editListItem').open();
+    this.showEditItemModal = true;
   }
 
   onEditClicked(item: ListItem) {
@@ -68,6 +69,7 @@ export class HomeComponent {
   }
 
   setActiveItems() {
+    console.log('sorting');
     this.activeItems = this.allItems.filter(i => i.completed == null)
       .sort((a, b) => a.dueBy - b.dueBy);
   }
@@ -86,9 +88,19 @@ export class HomeComponent {
     this.upcomingItems = this.incompleteItems.filter(i => i.dueBy == DueByWindow.Upcoming);
   }
 
-  onRefresh(listItems: Array<ListItem>) {
+  refresh(listItems: Array<ListItem>) {
     this.setListItems(listItems);
     this.resetFilters();
+  }
+
+  onItemEdited(listItems: Array<ListItem>) {
+    this.refresh(listItems);
+    this.showEditItemModal = false;
+  }
+
+  onItemAdded(listItems: Array<ListItem>) {
+    this.setListItems(listItems);
+    this.showAddItemModal = false;
   }
 
   resetFilters() {
@@ -108,13 +120,14 @@ export class HomeComponent {
   }
 
   viewIncompleted() {
-    this.activeItems = this.incompleteItems;
+    this.activeItems = this.incompleteItems
+      .sort((a, b) => a.dueBy - b.dueBy);
   }
 
   delete(itemId: number) {
     this.listItemservice.delete(itemId)
       .subscribe((response) => {
-        this.onRefresh(response);
+        this.refresh(response);
       });
   }
 

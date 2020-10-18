@@ -1,7 +1,7 @@
 import { Component, Inject, Output, EventEmitter } from '@angular/core';
 import { ListItem } from '../models/listItem.model';
 import { ListItemService } from '../services/list-item.service';
-import { NgxSmartModalService } from 'ngx-smart-modal';
+
 
 @Component({
   selector: 'add-list-item',
@@ -19,28 +19,23 @@ export class AddListItemComponent {
     @Inject('TYPEOPTIONS') private typeOptions,
     @Inject('SORTBYOPTIONS') private sortByOptions,
     private listItemService: ListItemService,
-    public modalService: NgxSmartModalService) {
+  ) {
 
   }
 
   onAddItem() {
     this.add();
     this.resetModel();
-    this.close();
   }
 
-  add() {
+  private add() {
     this.listItemService.add(this.listItem)
       .subscribe((response) => {
         this.listItemAdded.emit(response);
       });
   }
 
-  close() {
-    this.modalService.getModal('addListItem').close();
-  }
-
-  resetModel() {
+  private resetModel() {
     this.listItem = new ListItem();
   }
 
