@@ -6,6 +6,7 @@ import { ImportanceOptions, TypeOptions, SortByOptions } from '../global/enums-a
 import { ListItemService } from '../services/list-item.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AddListItemComponent', () => {
   let component: AddListItemComponent;
@@ -16,7 +17,8 @@ describe('AddListItemComponent', () => {
       imports: [
         FormsModule,
         HttpClientModule,
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientTestingModule
       ],
       declarations: [
         AddListItemComponent,
@@ -37,7 +39,11 @@ describe('AddListItemComponent', () => {
     fixture.detectChanges();
   });
 
-  it('#onAddItem() should set listItem to empty model', () => {
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('#resetModel() should set listItem to empty model', () => {
     component.resetModel();
     expect(component.listItem.id).toBe(0);
     expect(component.listItem.title).toBe(undefined);

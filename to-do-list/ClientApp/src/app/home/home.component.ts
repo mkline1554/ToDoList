@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
 import { ListItem } from '../models/listItem.model';
 import { DueByWindow } from '../global/enums-and-constants';
 import { ListItemService } from '../services/list-item.service';
@@ -38,7 +37,6 @@ export class HomeComponent {
 
   constructor(
     private http: HttpClient,
-    private fb: FormBuilder,
     private listItemservice: ListItemService,
   ) {
     this.listItemservice.get()
@@ -56,20 +54,26 @@ export class HomeComponent {
   }
 
   onEditClicked(item: ListItem) {
-    this.editItem = item;
+    this.setEditItem(item);
     this.openEditItemModal();
   }
 
-  setListItems(listItems: Array<ListItem>) {
-    this.allItems = listItems as Array<ListItem>;
+  setEditItem(item: ListItem) {
+    this.editItem = item;
+  }
 
+  setListItems(listItems: Array<ListItem>) {
+    this.setAllItems(listItems);
     this.setActiveItems();
     this.setCompleteAndIncomplete();
     this.setItemsByDueWindow();
   }
 
+  setAllItems(listItems: Array<ListItem>) {
+    this.allItems = listItems;
+  }
+
   setActiveItems() {
-    console.log('sorting');
     this.activeItems = this.allItems.filter(i => i.completed == null)
       .sort((a, b) => a.dueBy - b.dueBy);
   }

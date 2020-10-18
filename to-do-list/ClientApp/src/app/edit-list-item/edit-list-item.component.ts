@@ -10,10 +10,14 @@ import { ListItemService } from '../services/list-item.service';
 })
 export class EditListItemComponent {
 
-  @Input() editItem: ListItem = new ListItem();
+  @Input() inputItem: ListItem = new ListItem();
   @Output() listItemEdited: EventEmitter<any> = new EventEmitter<any>();
 
+  editItem: ListItem = null;
+
   isLoaded: boolean = false;
+
+  dueDate: string = '';
 
   constructor(
     @Inject('IMPORTANCEOPTIONS') private importanceOptions,
@@ -23,22 +27,35 @@ export class EditListItemComponent {
   ) {
   }
 
+  ngOnChanges(changes: any) {
+    if (changes.inputItem && changes.inputItem.previousValue != undefined) {
+      if (changes.inputItem.currentValue != changes.inputItem.previousValue) {
+        this.isLoaded = false;
+        this.editItem = new ListItem(this.inputItem);
+        this.dueDate = changes.inputItem.currentValue.due.substring(0, 10);
+        this.isLoaded = true;
+      }
+    }
+  }
+
   onEditItem() {
+    this.setExportDate();
     this.edit();
   }
 
   edit() {
-    this.listItemService.update(this.editItem)
+    this.listItemService.update(this.inputItem)
       .subscribe((response) => {
         this.listItemEdited.emit(response);
       });
   }
 
-  parseDate(dateString: string): Date {
-    if (dateString) {
-      return new Date(dateString);
-    }
-    return null;
+  setDateString(value: any) {
+    this.dueDate = value
+  }
+
+  setExportDate() {
+    this.inputItem.due = new Date(this.dueDate);
   }
 
 }

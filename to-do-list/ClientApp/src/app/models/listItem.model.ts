@@ -11,7 +11,7 @@ export class ListItem {
 
   created: Date = new Date;
   updated: Date = new Date;
-  due: Date = new Date;
+  due: Date = new Date();
   completed?: Date;
 
   dueBy: DueByWindow;

@@ -5,7 +5,7 @@ var ListItem = /** @class */ (function () {
         this.id = 0;
         this.created = new Date;
         this.updated = new Date;
-        this.due = new Date;
+        this.due = new Date();
         if (obj) {
             this.id = obj.id;
             this.title = obj.title;

@@ -34,7 +34,7 @@ namespace to_do_list.Models
                 this.Type = obj.Type;
 
                 this.Updated = DateTime.Now;
-                this.Due = obj.Due;
+                this.Due = new DateTime(obj.Due.Ticks);
                 this.Completed = obj.Completed;
             }
         }

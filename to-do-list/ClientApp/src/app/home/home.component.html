@@ -119,7 +119,7 @@
     </div>
 
     <div [class.modal]="!showEditItemModal" class="item-modal">
-      <edit-list-item [editItem]="editItem" (listItemEdited)="onItemEdited($event)"></edit-list-item>
+      <edit-list-item [inputItem]="editItem" (listItemEdited)="onItemEdited($event)"></edit-list-item>
     </div>
 
   </div>
