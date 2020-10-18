@@ -3,8 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var ListItem = /** @class */ (function () {
     function ListItem(obj) {
         this.id = 0;
-        this.title = '';
-        this.description = '';
         this.created = new Date;
         this.updated = new Date;
         this.due = new Date;

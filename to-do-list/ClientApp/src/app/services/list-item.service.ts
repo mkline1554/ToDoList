@@ -16,7 +16,6 @@ import { ListItem } from '../models/listItem.model';
 import { Observable } from 'rxjs';
 
 @Injectable()
-
 export class ListItemService {
 
   constructor(private http: HttpClient) {

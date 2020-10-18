@@ -28,14 +28,14 @@ export class AddListItemComponent {
     this.resetModel();
   }
 
-  private add() {
+  add() {
     this.listItemService.add(this.listItem)
       .subscribe((response) => {
         this.listItemAdded.emit(response);
       });
   }
 
-  private resetModel() {
+  resetModel() {
     this.listItem = new ListItem();
   }
 

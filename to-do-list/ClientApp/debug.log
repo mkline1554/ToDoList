@@ -44,3 +44,8 @@
 [1017/184140.203:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
 [1017/184140.203:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
 [1017/192827.563:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1018/093839.272:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\markk\AppData\Local\Temp\karma-84903744\Crashpad\attachments\f2baa706-ab40-402e-b542-43af731f6a7f: The system cannot find the path specified. (0x3)
+[1018/093839.734:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1018/093839.734:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1018/093839.734:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1018/093839.734:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)

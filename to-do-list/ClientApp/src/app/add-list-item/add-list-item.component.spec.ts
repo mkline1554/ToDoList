@@ -5,10 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ImportanceOptions, TypeOptions, SortByOptions } from '../global/enums-and-constants';
 import { ListItemService } from '../services/list-item.service';
 import { HttpClientModule } from '@angular/common/http';
-
-import { ListItem } from '../models/listItem.model';
-import { Title } from '@angular/platform-browser';
-import { Observable, of } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AddListItemComponent', () => {
   let component: AddListItemComponent;
@@ -18,7 +15,8 @@ describe('AddListItemComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        RouterTestingModule
       ],
       declarations: [
         AddListItemComponent,
@@ -40,15 +38,13 @@ describe('AddListItemComponent', () => {
   });
 
   it('#onAddItem() should set listItem to empty model', () => {
-    component.onAddItem();
+    component.resetModel();
     expect(component.listItem.id).toBe(0);
+    expect(component.listItem.title).toBe(undefined);
+    expect(component.listItem.description).toBe(undefined);
+    expect(component.listItem.importance).toBe(undefined);
+    expect(component.listItem.type).toBe(undefined);
   });
-
-  it('should create a new item', () => {
-    let component: AddListItemComponent;
-    const service: ListItemService = TestBed.get(ListItemService);
-    expect(service.add).toBeTruthy();
-  })
 
 });
 

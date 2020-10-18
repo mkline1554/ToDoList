@@ -3,8 +3,8 @@ import { DueByWindow } from "../global/enums-and-constants";
 export class ListItem {
   id: number = 0;
 
-  title: string = '';
-  description: string = '';
+  title: string;
+  description: string;
 
   importance: string;
   type: string;
@@ -17,8 +17,8 @@ export class ListItem {
   dueBy: DueByWindow;
 
   constructor()
-  constructor(obj: ListItem)
-  constructor(obj?: ListItem) {
+  constructor(obj: any)
+  constructor(obj?: any) {
     if (obj) {
       this.id = obj.id;
 
