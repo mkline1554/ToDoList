@@ -170,5 +170,15 @@ describe('HomeComponent', () => {
     expect(component.window).toEqual(0);
   });
 
+  it('closeAddItemModal(), should set the showAddItemModal property to false', () => {
+    component.closeAddItemModal();
+    expect(component.showAddItemModal).toEqual(false);
+  });
+
+  it('closeeditItemModal(), should set the showEditItemModal property to false', () => {
+    component.closeEditItemModal();
+    expect(component.showEditItemModal).toEqual(false);
+  })
+
 });
 

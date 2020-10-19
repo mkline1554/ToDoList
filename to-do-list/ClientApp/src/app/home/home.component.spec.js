@@ -143,5 +143,13 @@ describe('HomeComponent', function () {
         component.setDueByWindow(0);
         expect(component.window).toEqual(0);
     });
+    it('closeAddItemModal(), should set the showAddItemModal property to false', function () {
+        component.closeAddItemModal();
+        expect(component.showAddItemModal).toEqual(false);
+    });
+    it('closeeditItemModal(), should set the showEditItemModal property to false', function () {
+        component.closeEditItemModal();
+        expect(component.showEditItemModal).toEqual(false);
+    });
 });
 //# sourceMappingURL=home.component.spec.js.map

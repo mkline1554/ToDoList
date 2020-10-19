@@ -103,7 +103,7 @@ export class HomeComponent {
   }
 
   onItemAdded(listItems: Array<ListItem>) {
-    this.setListItems(listItems);
+    this.refresh(listItems);
     this.closeAddItemModal();
   }
 

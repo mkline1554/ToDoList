@@ -52,6 +52,17 @@ describe('AddListItemComponent', () => {
     expect(component.listItem.type).toBe(undefined);
   });
 
+  it('onCancel(), should send out the cancel emitter', () => {
+    spyOn(component.cancel, 'emit');
+    let nativeElement = fixture.nativeElement;
+    const closeElement = nativeElement.querySelector('.close');
+    closeElement.dispatchEvent(new Event('click'));
+
+    fixture.detectChanges();
+
+    expect(component.cancel.emit).toHaveBeenCalled();
+  })
+
 });
 
 

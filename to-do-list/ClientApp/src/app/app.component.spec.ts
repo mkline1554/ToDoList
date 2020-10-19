@@ -7,6 +7,8 @@ import { AddListItemComponent } from './add-list-item/add-list-item.component';
 import { EditListItemComponent } from './edit-list-item/edit-list-item.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AppComponent', () => {
   beforeEach(() => {
@@ -14,9 +16,11 @@ describe('AppComponent', () => {
       imports: [
         FormsModule,
         HttpClientModule,
-        RouterModule.forRoot([
-          { path: '', component: HomeComponent, pathMatch: 'full' }
-        ])
+        RouterTestingModule,
+        HttpClientTestingModule
+        //RouterModule.forRoot([
+        //  { path: '', component: HomeComponent, pathMatch: 'full' }
+        //])
       ],
       declarations: [
         HomeComponent,

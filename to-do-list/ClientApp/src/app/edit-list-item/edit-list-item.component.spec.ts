@@ -7,10 +7,15 @@ import { ListItemService } from '../services/list-item.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ListItem } from '../models/listItem.model';
 
 describe('EditListItemComponent', () => {
   let component: EditListItemComponent;
   let fixture: ComponentFixture<EditListItemComponent>;
+
+  let listItem: ListItem = new ListItem(
+    { id: 1, title: 'test', description: 'test description', importance: 'High', type: 'Errand' }
+  );
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -50,5 +55,16 @@ describe('EditListItemComponent', () => {
     component.setExportDate();
     expect(component.inputItem.due).toEqual(expectedDate);
   });
+
+  it('onCancel(), should send out the cancel emitter', () => {
+    spyOn(component.cancel, 'emit');
+    let nativeElement = fixture.nativeElement;
+    const closeElement = nativeElement.querySelector('.close');
+    closeElement.dispatchEvent(new Event('click'));
+
+    fixture.detectChanges();
+
+    expect(component.cancel.emit).toHaveBeenCalled();
+  })
 
 });
