@@ -103,11 +103,13 @@ describe('HomeComponent', function () {
         expect(component.showIncomplete).toEqual(false);
         expect(component.showCompleted).toEqual(false);
     });
-    it('onViewSpecificDueWindow(), should call setDueWindow() and filterItemsByDueWindow()', function () {
+    it('onViewSpecificDueWindow(), should call setDueWindow(), setActiveItems(), and filterItemsByDueWindow()', function () {
         spyOn(component, 'setDueByWindow');
+        spyOn(component, 'setActiveItems');
         spyOn(component, 'filterItemsByDueWindow');
         component.onViewSpecificDueWindow(component.window);
         expect(component.setDueByWindow).toHaveBeenCalled();
+        expect(component.setActiveItems).toHaveBeenCalled();
         expect(component.filterItemsByDueWindow).toHaveBeenCalled();
     });
     it('onViewCompleted(), should set showIncomplete to false and showComplete to true', function () {

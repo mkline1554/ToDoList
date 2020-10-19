@@ -90,6 +90,7 @@ export class HomeComponent {
     this.thisWeekItems = this.incompleteItems.filter(i => i.dueBy == DueByWindow.ThisWeek);
     this.nextWeekItems = this.incompleteItems.filter(i => i.dueBy == DueByWindow.NextWeek);
     this.upcomingItems = this.incompleteItems.filter(i => i.dueBy == DueByWindow.Upcoming);
+    console.log(this.todayItems);
   }
 
   refresh(listItems: Array<ListItem>) {
@@ -124,7 +125,7 @@ export class HomeComponent {
   }
 
   filterItemsByDueWindow() {
-    this.activeItems = this.allItems.filter(i => i.dueBy == this.window);
+    this.activeItems = this.activeItems.filter(i => i.dueBy == this.window);
   }
 
   viewCompletedOnly() {
@@ -139,7 +140,8 @@ export class HomeComponent {
   delete(itemId: number) {
     this.listItemservice.delete(itemId)
       .subscribe((response) => {
-        this.refresh(response);
+        this.setListItems(response);
+        this.viewIncompleted();
       });
   }
 
@@ -161,6 +163,7 @@ export class HomeComponent {
     this.showCompleted = false;
     this.showIncomplete = false;
     this.setDueByWindow(window);
+    this.setActiveItems();
     this.filterItemsByDueWindow();
   }
 

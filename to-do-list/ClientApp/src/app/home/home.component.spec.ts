@@ -124,11 +124,13 @@ describe('HomeComponent', () => {
     expect(component.showCompleted).toEqual(false);
   });
 
-  it('onViewSpecificDueWindow(), should call setDueWindow() and filterItemsByDueWindow()', () => {
+  it('onViewSpecificDueWindow(), should call setDueWindow(), setActiveItems(), and filterItemsByDueWindow()', () => {
     spyOn(component, 'setDueByWindow');
+    spyOn(component, 'setActiveItems');
     spyOn(component, 'filterItemsByDueWindow');
     component.onViewSpecificDueWindow(component.window);
     expect(component.setDueByWindow).toHaveBeenCalled();
+    expect(component.setActiveItems).toHaveBeenCalled();
     expect(component.filterItemsByDueWindow).toHaveBeenCalled();
   });
 
