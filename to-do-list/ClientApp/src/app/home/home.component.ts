@@ -99,12 +99,20 @@ export class HomeComponent {
 
   onItemEdited(listItems: Array<ListItem>) {
     this.refresh(listItems);
-    this.showEditItemModal = false;
+    this.closeEditItemModal();
   }
 
   onItemAdded(listItems: Array<ListItem>) {
     this.setListItems(listItems);
+    this.closeAddItemModal();
+  }
+
+  closeAddItemModal() {
     this.showAddItemModal = false;
+  }
+
+  closeEditItemModal() {
+    this.showEditItemModal = false;
   }
 
   resetFilters() {

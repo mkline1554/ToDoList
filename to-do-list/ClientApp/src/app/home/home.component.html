@@ -115,11 +115,14 @@
     </div>
 
     <div [class.modal]="!showAddItemModal" class="item-modal">
-      <add-list-item (listItemAdded)="onItemAdded($event)"></add-list-item>
+      <add-list-item (listItemAdded)="onItemAdded($event)"
+                     (cancel)="closeAddItemModal()"></add-list-item>
     </div>
 
     <div [class.modal]="!showEditItemModal" class="item-modal">
-      <edit-list-item [inputItem]="editItem" (listItemEdited)="onItemEdited($event)"></edit-list-item>
+      <edit-list-item [inputItem]="editItem"
+                      (listItemEdited)="onItemEdited($event)"
+                      (cancel)="closeEditItemModal()"></edit-list-item>
     </div>
 
   </div>

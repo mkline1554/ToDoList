@@ -12,6 +12,7 @@ export class EditListItemComponent {
 
   @Input() inputItem: ListItem = new ListItem();
   @Output() listItemEdited: EventEmitter<any> = new EventEmitter<any>();
+  @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
 
   editItem: ListItem = null;
 
@@ -56,6 +57,10 @@ export class EditListItemComponent {
 
   setExportDate() {
     this.inputItem.due = new Date(this.dueDate);
+  }
+
+  onCancel() {
+    this.cancel.emit();
   }
 
 }

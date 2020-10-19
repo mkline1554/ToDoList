@@ -11,6 +11,7 @@ import { ListItemService } from '../services/list-item.service';
 export class AddListItemComponent {
 
   @Output() listItemAdded: EventEmitter<any> = new EventEmitter<any>();
+  @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
 
   listItem: ListItem = new ListItem();
 
@@ -37,6 +38,10 @@ export class AddListItemComponent {
 
   resetModel() {
     this.listItem = new ListItem();
+  }
+
+  onCancel() {
+    this.cancel.emit();
   }
 
 }

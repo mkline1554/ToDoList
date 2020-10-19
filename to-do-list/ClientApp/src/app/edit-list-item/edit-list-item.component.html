@@ -1,8 +1,8 @@
 
-
   <div class="modal-container">
-    <h1 class="modal-title">Edit Item</h1>
-    <hr />
+    <div class="modal-header">
+      <h1 class="modal-title">Update Item</h1><i class="fa fa-times-circle close" (click)="onCancel()"></i>
+    </div>
 
     <form (ngSubmit)="onEditItem()" *ngIf="isLoaded">
 
