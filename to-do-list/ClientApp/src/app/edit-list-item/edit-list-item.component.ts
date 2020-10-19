@@ -20,9 +20,9 @@ export class EditListItemComponent {
   dueDate: string = '';
 
   constructor(
-    @Inject('IMPORTANCEOPTIONS') private importanceOptions,
-    @Inject('TYPEOPTIONS') private typeOptions,
-    @Inject('SORTBYOPTIONS') private sortByOptions,
+    @Inject('IMPORTANCEOPTIONS') public importanceOptions,
+    @Inject('TYPEOPTIONS') public typeOptions,
+    @Inject('SORTBYOPTIONS') public sortByOptions,
     private listItemService: ListItemService
   ) {
   }
