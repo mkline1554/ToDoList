@@ -2,8 +2,7 @@
   "runtimeOptions": {
     "additionalProbingPaths": [
       "C:\\Users\\markk\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\markk\\.nuget\\packages",
-      "C:\\Microsoft\\Xamarin\\NuGet"
+      "C:\\Users\\markk\\.nuget\\packages"
     ]
   }
 }

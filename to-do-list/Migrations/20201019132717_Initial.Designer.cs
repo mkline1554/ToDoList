@@ -10,8 +10,8 @@ using to_do_list.Data;
 namespace to_do_list.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201017145429_Inital")]
-    partial class Inital
+    [Migration("20201019132717_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
