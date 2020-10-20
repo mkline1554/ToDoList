@@ -97,7 +97,6 @@ C:\Users\markk\ToDoList\UnitTests\bin\Debug\netcoreapp3.1\appsettings.Developmen
 C:\Users\markk\ToDoList\UnitTests\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\markk\ToDoList\UnitTests\bin\Debug\netcoreapp3.1\to-do-list.Views.dll
 C:\Users\markk\ToDoList\UnitTests\bin\Debug\netcoreapp3.1\to-do-list.Views.pdb
-C:\Users\markk\ToDoList\UnitTests\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\markk\ToDoList\UnitTests\bin\Debug\netcoreapp3.1\to-do-list.exe
 C:\Users\markk\ToDoList\UnitTests\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.NodeServices.dll
 C:\Users\markk\ToDoList\UnitTests\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.SpaServices.dll
