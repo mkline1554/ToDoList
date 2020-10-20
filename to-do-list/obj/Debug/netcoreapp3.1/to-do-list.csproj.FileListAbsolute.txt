@@ -1,5 +1,4 @@
 C:\Users\markk\ToDoList\to-do-list\bin\Debug\netcoreapp3.1\appsettings.Development.json
-C:\Users\markk\ToDoList\to-do-list\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\markk\ToDoList\to-do-list\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\markk\ToDoList\to-do-list\bin\Debug\netcoreapp3.1\to-do-list.exe
 C:\Users\markk\ToDoList\to-do-list\bin\Debug\netcoreapp3.1\to-do-list.deps.json
