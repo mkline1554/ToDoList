@@ -5,6 +5,4 @@ node_modules\
 *Dockerfile
 **docker-compose
 *node_modules
-appsettings.json
-**/appsettings.json
 .vs\
