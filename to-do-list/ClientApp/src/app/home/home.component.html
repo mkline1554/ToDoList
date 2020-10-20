@@ -102,14 +102,10 @@
             </p>
             -
             <p class="inline">
-              {{ item.importance }}
+              {{ item.importance }} priority
             </p>
             <p class=" inline">
               {{ item.description | slice : 0:60 }}
-            </p>
-            -
-            <p class="inline">
-              {{ item.type }}
             </p>
             <i class="fa fa-trash manage pointer-hover red-action" (click)="delete(item.id)"></i>
             <i class="fa fa-pencil manage pointer-hover gray-action" (click)="onEditClicked(item)" *ngIf="item.completed == null"></i>

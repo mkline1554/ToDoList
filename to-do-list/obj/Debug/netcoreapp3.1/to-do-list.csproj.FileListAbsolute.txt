@@ -79,3 +79,4 @@ C:\Users\markk\ToDoList\to-do-list\bin\Debug\netcoreapp3.1\runtimes\win\lib\nets
 C:\Users\markk\ToDoList\to-do-list\obj\Debug\netcoreapp3.1\to-do-list.csproj.CoreCompileInputs.cache
 C:\Users\markk\ToDoList\to-do-list\obj\Debug\netcoreapp3.1\to-do-list.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\markk\ToDoList\to-do-list\obj\Debug\netcoreapp3.1\to-do-list.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\markk\ToDoList\to-do-list\bin\Debug\netcoreapp3.1\appsettings.json
