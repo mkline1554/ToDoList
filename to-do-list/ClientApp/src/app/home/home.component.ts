@@ -90,7 +90,6 @@ export class HomeComponent {
     this.thisWeekItems = this.incompleteItems.filter(i => i.dueBy == DueByWindow.ThisWeek);
     this.nextWeekItems = this.incompleteItems.filter(i => i.dueBy == DueByWindow.NextWeek);
     this.upcomingItems = this.incompleteItems.filter(i => i.dueBy == DueByWindow.Upcoming);
-    console.log(this.todayItems);
   }
 
   refresh(listItems: Array<ListItem>) {

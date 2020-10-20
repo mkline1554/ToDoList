@@ -10,7 +10,7 @@ using to_do_list.Data;
 namespace to_do_list.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201019132717_Initial")]
+    [Migration("20201019170453_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

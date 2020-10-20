@@ -22,9 +22,9 @@
         <label for="type">Type</label>
         <select [(ngModel)]="listItem.type" [ngModelOptions]="{standalone: true}" class="form-control">
           <option *ngFor="let option of typeOptions; let i = index;"
-                  [selected]="option.value == listItem.type"
-                  [value]="option.value">
-            {{ option.name }}
+                  [selected]="option == listItem.type"
+                  [ngValue]="option">
+            {{ option }}
           </option>
         </select>
       </div>
@@ -34,9 +34,9 @@
         <label for="Importance">Importance</label>
         <select [(ngModel)]="listItem.importance" [ngModelOptions]="{standalone: true}" class="form-control">
           <option *ngFor="let option of importanceOptions; let i = index;"
-                  [selected]="option.value == listItem.importance"
-                  [value]="option.value">
-            {{ option.name }}
+                  [selected]="option == listItem.importance"
+                  [ngValue]="option">
+            {{ option }}
           </option>
         </select>
       </div>

@@ -97,11 +97,18 @@
               {{ item.title | slice : 0:30 }}
             </h5>
             -
+            <p class="inline">
+              {{ item.type }}
+            </p>
+            -
+            <p class="inline">
+              {{ item.importance }}
+            </p>
             <p class=" inline">
               {{ item.description | slice : 0:60 }}
             </p>
             -
-            <p class=" inline">
+            <p class="inline">
               {{ item.type }}
             </p>
             <i class="fa fa-trash manage pointer-hover red-action" (click)="delete(item.id)"></i>

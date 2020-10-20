@@ -75,25 +75,6 @@ namespace to_do_list.Models
     }
 }
 
-
-public enum Importance
-{
-    Low,
-    Medium,
-    High
-}
-
-public enum Type
-{
-    Errand,
-    Chore,
-    Work,
-    Task,
-    Personal,
-    Special,
-    Other
-}
-
 public enum DueByWindow
 {
     Overdue,

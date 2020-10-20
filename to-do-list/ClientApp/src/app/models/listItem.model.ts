@@ -1,4 +1,4 @@
-import { DueByWindow } from "../global/enums-and-constants";
+import { DueByWindow, ImportanceOptions, TypeOptions } from "../global/enums-and-constants";
 
 export class ListItem {
   id: number = 0;
@@ -6,8 +6,8 @@ export class ListItem {
   title: string;
   description: string;
 
-  importance: string;
-  type: string;
+  importance: number;
+  type: number;
 
   created: Date = new Date;
   updated: Date = new Date;

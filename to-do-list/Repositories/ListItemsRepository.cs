@@ -17,9 +17,11 @@ namespace to_do_list.Repositories
             this.context = context;
         }
 
-        public IEnumerable<ListItem> Get() => this.context.ListItems.OrderBy(i => i.Type);
+        public IEnumerable<ListItem> Get() => this.context.ListItems
+            .OrderBy(i => i.Type);
 
-        public ListItem Get(int id) => this.context.ListItems.FirstOrDefault(li => li.Id == id);
+        public ListItem Get(int id) => this.context.ListItems
+            .FirstOrDefault(li => li.Id == id);
 
         public ListItem Add(ListItem item)
         {
@@ -42,8 +44,11 @@ namespace to_do_list.Repositories
 
         public IEnumerable<ListItem> Complete(ListItem item)
         {
-            item.Completed = DateTime.Now;
-            return this.Update(item);
+            ListItem existingItem = this.context.ListItems.FirstOrDefault(i => i.Id == item.Id);
+
+            existingItem.Completed = DateTime.Now;
+
+            return this.Update(existingItem);
         }
 
         public IEnumerable<ListItem> Delete(int id)
